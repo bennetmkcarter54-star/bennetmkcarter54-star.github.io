@@ -1,439 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bennet Michal Carter | Finance x AI</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bennet Michal Carter | Finance AI Trainer & CFA</title>
+<meta name="description" content="Bennet Michal Carter - CFA charterholder and Finance AI Trainer bridging the gap between high finance (M&A, FP&A) and artificial intelligence." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Palette: Algorithmic Finance (Obsidian, Tech Blue, Bull Market Gold) */
+    --bg-base:      #050505;
+    --bg-panel:     #0c0c0e;
+    --bg-card:      #121214;
+    --border-dim:   #222226;
+    --border-glow:  #3b82f6;
+    --text-main:    #ededed;
+    --text-muted:   #a1a1aa;
+    --accent-blue:  #3b82f6;   /* AI/Tech */
+    --accent-gold:  #fbbf24;   /* Finance/Value */
+    --accent-green: #10b981;   /* Growth/Metrics */
 
-        :root {
-            --bg-main: #050505;
-            --bg-surface: #111111;
-            --bg-card: #181818;
-            --text-main: #94a3b8;
-            --text-bright: #f8fafc;
-            --accent: #00f0ff;
-            --accent-glow: rgba(0, 240, 255, 0.15);
-            --border-color: #333333;
-            --font-mono: 'Fira Code', monospace;
-            --font-sans: 'Inter', sans-serif;
-        }
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    --max-w: 1200px;
+    --pad-x: clamp(1.5rem, 5vw, 4rem);
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  * { box-sizing: border-box; }
 
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+  html { scroll-behavior: smooth; }
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: var(--font-mono);
-            color: var(--text-bright);
-            font-weight: 600;
-        }
+  body {
+    margin: 0;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-        /* Terminal Intro */
-        .hero {
-            padding: 6rem 2rem 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+  /* Abstract Data Grid Background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: radial-gradient(circle at 50% 0%, black 10%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at 50% 0%, black 10%, transparent 80%);
+  }
 
-        .terminal-window {
-            background-color: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(59, 130, 246, 0.3); color: #fff; }
 
-        .terminal-header {
-            background-color: #1a1a1a;
-            padding: 0.75rem 1rem;
-            display: flex;
-            gap: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 100;
+    background: rgba(5, 5, 5, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-dim);
+  }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .dot.red { background-color: #ff5f56; }
-        .dot.yellow { background-color: #ffbd2e; }
-        .dot.green { background-color: #27c93f; }
+  .nav-container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 1rem var(--pad-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-        .terminal-body {
-            padding: 2rem;
-            font-family: var(--font-mono);
-        }
+  .logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-        .prompt {
-            color: var(--accent);
-            margin-right: 10px;
-        }
+  .logo-blinker {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background-color: var(--accent-blue);
+    animation: blink 1.5s infinite;
+  }
 
-        .terminal-body h1 {
-            font-size: 2.5rem;
-            margin: 1rem 0 0.5rem;
-            letter-spacing: -1px;
-        }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .terminal-body p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
 
-        /* Container & Layout */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem 4rem;
-        }
+  .nav-links a { transition: color 0.2s ease; }
+  .nav-links a:hover { color: var(--accent-blue); }
 
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+  @media (max-width: 768px) { .nav-links { display: none; } }
 
-        .section-title::before {
-            content: "/>";
-            color: var(--accent);
-        }
+  /* Section Containers */
+  section {
+    padding: 6rem var(--pad-x);
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
 
-        .section-title::after {
-            content: "";
-            flex-grow: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--border-color) 0%, transparent 100%);
-        }
+  .section-header {
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border-dim);
+    padding-bottom: 1rem;
+  }
 
-        /* Experience Grid */
-        .experience-grid {
-            display: grid;
-            gap: 1.5rem;
-            position: relative;
-        }
+  .section-id {
+    font-family: var(--font-mono);
+    color: var(--accent-blue);
+    font-size: 0.9rem;
+  }
 
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+  .section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1;
+  }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background-color: var(--accent);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-            transform-origin: bottom;
-        }
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 8rem;
+    position: relative;
+  }
 
-        .card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-2px);
-        }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
 
-        .card:hover::before {
-            transform: scaleY(1);
-        }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+  .sys-status {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    border-radius: 4px;
+    background: rgba(251, 191, 36, 0.05);
+  }
 
-        .card h3 {
-            font-size: 1.25rem;
-            color: var(--text-bright);
-            margin-bottom: 0.25rem;
-        }
+  .hero h1 {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    letter-spacing: -0.03em;
+  }
 
-        .company {
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-        }
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--text-main), var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-        .date-badge {
-            background-color: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-main);
-        }
+  .hero-role {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--accent-blue);
+    margin-bottom: 1.5rem;
+  }
 
-        .card ul {
-            list-style: none;
-        }
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 48ch;
+    margin-bottom: 2.5rem;
+  }
 
-        .card li {
-            margin-bottom: 0.75rem;
-            position: relative;
-            padding-left: 1.5rem;
-            font-size: 0.95rem;
-        }
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
-        .card li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-family: var(--font-mono);
-        }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-        /* Tech Stack / Skills */
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+  .btn-primary {
+    background: var(--accent-blue);
+    color: #fff;
+    border: 1px solid var(--accent-blue);
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--accent-blue);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  }
 
-        .skill-tag {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-dim);
+  }
+  .btn-outline:hover {
+    border-color: var(--text-main);
+    background: rgba(255,255,255,0.05);
+  }
 
-        .skill-tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background-color: var(--accent-glow);
-        }
+  /* Abstract Financial Chart Art */
+  .chart-art {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    opacity: 0.8;
+  }
 
-        /* Dual Column Layout for smaller sections */
-        .dual-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 4rem;
-        }
+  .bar {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-dim);
+    border-bottom: none;
+    position: relative;
+    border-radius: 4px 4px 0 0;
+    transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-        .edu-item {
-            margin-bottom: 1.5rem;
-        }
-        
-        .edu-item h4 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
+  .bar::after {
+    content: '';
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 40px;
+    background: var(--accent-blue);
+    opacity: 0.5;
+  }
+  
+  .bar.bull::after { background: var(--accent-green); }
+  .bar.bear::after { background: var(--accent-gold); }
 
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 2rem;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: #666;
-        }
+  /* Metrics Panel */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
 
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-dim);
+    padding: 1.5rem;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
 
-        a:hover {
-            text-decoration: underline;
-            text-shadow: 0 0 8px var(--accent-glow);
-        }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+    opacity: 0.5;
+  }
 
-        @media (max-width: 768px) {
-            .hero { padding: 3rem 1rem 2rem; }
-            .container { padding: 0 1rem 2rem; }
-            .dual-col { grid-template-columns: 1fr; gap: 2rem; }
-        }
-    </style>
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-value {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-main);
+  }
+
+  /* Experience Cards (Terminal Log Style) */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .log-entry {
+    background: var(--bg-card);
+    border: 1px solid var(--border-dim);
+    padding: 2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .log-entry:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateX(5px);
+  }
+
+  .log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .log-title h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .log-company {
+    font-family: var(--font-mono);
+    color: var(--accent-gold);
+    font-size: 0.9rem;
+  }
+
+  .log-meta {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--bg-base);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border-dim);
+    border-radius: 4px;
+  }
+
+  .log-entry ul {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+
+  .log-entry li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #c4c4c4;
+    font-size: 0.95rem;
+  }
+
+  .log-entry li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-family: var(--font-mono);
+  }
+
+  /* Skills & Modules */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-dim);
+    border-radius: 4px;
+    background: var(--bg-card);
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+
+  .edu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .edu-item {
+    border-left: 2px solid var(--border-dim);
+    padding-left: 1rem;
+  }
+  
+  .edu-item h4 {
+    margin: 0 0 0.25rem 0;
+    font-weight: 500;
+  }
+
+  .edu-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border-dim);
+    padding: 2rem var(--pad-x);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+</style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
-            </div>
-            <div class="terminal-body">
-                <span class="prompt">bennet@ai-finance:~$</span> ./initialize_profile.sh
-                <h1>Bennet Michal Carter[cite: 1]</h1>
-                <p style="color: var(--text-main);">CFA Charterholder[cite: 1] | Finance AI Trainer[cite: 1] | M&A & FP&A Specialist[cite: 1]</p>
-                <br>
-                <span class="prompt">bennet@ai-finance:~$</span> cat summary.txt
-                <p style="color: var(--text-bright); line-height: 1.8; margin-top: 1rem;">
-                    Executing the intersection of deep financial modeling and artificial intelligence. I combine six years of investment banking, private equity, and corporate FP&A experience with modern AI model evaluation[cite: 1]. My focus is on writing training prompts, scoring rubrics, and evaluating AI reasoning in valuation, M&A, and financial reporting[cite: 1].
-                </p>
-                <p style="margin-top: 1rem; font-size: 0.9rem;">
-                    <span class="prompt">></span> Contact: <a href="mailto:bennetmkcarter@gmail.com">bennetmkcarter@gmail.com[cite: 1]</a>
-                </p>
-            </div>
+<nav>
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <span class="logo-blinker"></span>
+      B.CARTER_
+    </a>
+    <div class="nav-links">
+      <a href="#about">01. PROFILE</a>
+      <a href="#experience">02. EXECUTION</a>
+      <a href="#architecture">03. ARCHITECTURE</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="sys-status">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent-gold)"><circle cx="12" cy="12" r="10"></circle></svg>
+        SYSTEM ONLINE // CFA CHARTERHOLDER
+      </div>
+      <h1><span>Bennet Michal</span><br>Carter.</h1>
+      <div class="hero-role">&gt; Finance AI Trainer & FP&A Specialist</div>
+      <p class="hero-desc">Bridging deep financial modeling expertise with emerging AI reasoning. Translating technical financial judgment—DCF, LBO, and M&A logic—into structured, criteria-based evaluation for large AI platforms.</p>
+      
+      <div class="btn-group">
+        <a href="mailto:bennetmkcarter@gmail.com" class="btn btn-primary">Initialize Contact</a>
+        <a href="https://github.com/bennetmkcarter54-star" class="btn btn-outline">View Repository</a>
+      </div>
+    </div>
+    
+    <!-- Abstract Chart Art -->
+    <div class="chart-art">
+      <div class="bar bull" style="height: 40%"></div>
+      <div class="bar bull" style="height: 55%"></div>
+      <div class="bar bear" style="height: 45%"></div>
+      <div class="bar bull" style="height: 70%"></div>
+      <div class="bar bear" style="height: 60%"></div>
+      <div class="bar bull" style="height: 85%"></div>
+      <div class="bar bull" style="height: 100%"></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-header">
+    <span class="section-id">01</span>
+    <h2 class="section-title">System Metrics</h2>
+  </div>
+  
+  <p style="font-size: 1.1rem; color: #d4d4d8; max-width: 800px; margin-bottom: 3rem;">
+    With six years of rigorous investment banking, private equity, and corporate FP&A experience, I have pivoted to the frontier of financial technology. My current focus is evaluating and correcting AI-generated financial analyses, ensuring models accurately interpret methodology, accounting treatments, and complex valuation logic.
+  </p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">M&A Deal Exposure</div>
+      <div class="metric-value">$2.0B+</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">FP&A Portfolio Auth</div>
+      <div class="metric-value">$1.0B+</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">AI Models Evaluated</div>
+      <div class="metric-value">500+ <span style="font-size: 0.8rem; color: var(--accent-muted);">(6 months)</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Forecast Accuracy Lift</div>
+      <div class="metric-value">+15%</div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <span class="section-id">02</span>
+    <h2 class="section-title">Execution Log</h2>
+  </div>
+
+  <div class="timeline">
+    
+    <div class="log-entry">
+      <div class="log-header">
+        <div class="log-title">
+          <h3>Finance AI Trainer</h3>
+          <div class="log-company">@ SuperAnnotate</div>
         </div>
-    </section>
-
-    <div class="container">
-        
-        <section style="margin-bottom: 4rem;">
-            <h2 class="section-title">Core Architecture & Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-tag"><span style="color: var(--accent);">01.</span> Financial Modeling (DCF, LBO, Comps)[cite: 1]</div>
-                <div class="skill-tag"><span style="color: var(--accent);">02.</span> AI Model Evaluation & Rubric Design[cite: 1]</div>
-                <div class="skill-tag"><span style="color: var(--accent);">03.</span> Python & Power BI Data Automation[cite: 1]</div>
-                <div class="skill-tag"><span style="color: var(--accent);">04.</span> Prompt & Training Data Authoring[cite: 1]</div>
-                <div class="skill-tag"><span style="color: var(--accent);">05.</span> Valuation & Investment Analysis[cite: 1]</div>
-                <div class="skill-tag"><span style="color: var(--accent);">06.</span> FP&A and Forecasting[cite: 1]</div>
-                <div class="skill-tag"><span style="color: var(--accent);">07.</span> GAAP / IFRS / SEC Standards[cite: 1]</div>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="section-title">Professional Execution Log</h2>
-            <div class="experience-grid">
-                
-                <!-- SuperAnnotate -->
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <h3>Finance AI Trainer[cite: 1]</h3>
-                            <div class="company">@ SuperAnnotate[cite: 1]</div>
-                        </div>
-                        <div class="date-badge">2024 - Present | Remote[cite: 1]</div>
-                    </div>
-                    <ul>
-                        <li>Reviewed over 500 AI-generated financial analyses in the first six months, successfully identifying methodological errors in valuation logic and accounting treatment[cite: 1].</li>
-                        <li>Authored detailed model solutions and explanations to guide AI reasoning, defining the precise scoring rubrics used to grade output quality[cite: 1].</li>
-                        <li>Evaluated output against strict GAAP, IFRS, and SEC filing standards across M&A, LBO modeling, and DCF valuation[cite: 1].</li>
-                    </ul>
-                </div>
-
-                <!-- Shopify -->
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <h3>FP&A Manager, Corporate Finance[cite: 1]</h3>
-                            <div class="company">@ Shopify[cite: 1]</div>
-                        </div>
-                        <div class="date-badge">2022 - 2024 | Ottawa, ON[cite: 1]</div>
-                    </div>
-                    <ul>
-                        <li>Led annual budgeting and quarterly forecasting across multiple business units, supporting a $1B+ revenue portfolio[cite: 1].</li>
-                        <li>Automated forecasting processes utilizing Python and Power BI, efficiently cutting manual workload by 20%[cite: 1].</li>
-                        <li>Implemented a modernized financial reporting framework that demonstrably improved forecast accuracy by 15%[cite: 1].</li>
-                        <li>Built robust financial models to evaluate strategic initiatives, including key geographic expansions and product launches[cite: 1].</li>
-                    </ul>
-                </div>
-
-                <!-- Torquest Partners -->
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <h3>Private Equity Associate[cite: 1]</h3>
-                            <div class="company">@ Torquest Partners[cite: 1]</div>
-                        </div>
-                        <div class="date-badge">2020 - 2022 | Toronto, ON[cite: 1]</div>
-                    </div>
-                    <ul>
-                        <li>Evaluated over 100 potential investment opportunities, successfully executing 3 platform investments and 2 add-on acquisitions[cite: 1].</li>
-                        <li>Led comprehensive financial due diligence on acquisition targets, rigorously assessing business models and cash flow trajectories[cite: 1].</li>
-                        <li>Built complex LBO models to evaluate potential investment returns and optimize overarching capital structures[cite: 1].</li>
-                    </ul>
-                </div>
-
-                <!-- BMO Capital Markets -->
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <h3>Investment Banking Analyst, TMT[cite: 1]</h3>
-                            <div class="company">@ BMO Capital Markets[cite: 1]</div>
-                        </div>
-                        <div class="date-badge">2018 - 2020 | Toronto, ON[cite: 1]</div>
-                    </div>
-                    <ul>
-                        <li>Supported execution on over $2 billion in completed M&A transactions, navigating complex cross-border deals[cite: 1].</li>
-                        <li>Built and actively maintained DCF, LBO, and comparable company models for M&A and capital raising[cite: 1].</li>
-                        <li>Conducted deep-dive industry research and financial due diligence within the Technology, Media, & Telecom sectors[cite: 1].</li>
-                    </ul>
-                </div>
-
-            </div>
-        </section>
-
-        <div class="dual-col">
-            <section>
-                <h2 class="section-title">System Requirements (Edu)</h2>
-                <div class="edu-item">
-                    <h4>Chartered Financial Analyst (CFA)[cite: 1]</h4>
-                    <span class="company">CFA Institute[cite: 1]</span>
-                </div>
-                <div class="edu-item">
-                    <h4>Data Science for Investment Professionals Certificate[cite: 1]</h4>
-                    <span class="company">CFA Institute[cite: 1]</span>
-                </div>
-                <div class="edu-item">
-                    <h4>Financial Technology Graduate Certificate[cite: 1]</h4>
-                    <span class="company">Completed 2018[cite: 1]</span>
-                </div>
-                <div class="edu-item">
-                    <h4>Bachelor's Degree in Finance[cite: 1]</h4>
-                    <span class="company">Completed 2014 - 2018[cite: 1]</span>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="section-title">External Modules (Certs)</h2>
-                <div class="card" style="padding: 1.5rem;">
-                    <h4>AI for Everyone[cite: 1]</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Andrew Ng (Coursera)[cite: 1]</p>
-                    
-                    <h4>Machine Learning[cite: 1]</h4>
-                    <p style="font-size: 0.9rem;">Stanford University (Coursera)[cite: 1]</p>
-                </div>
-            </section>
-        </div>
-
+        <div class="log-meta">2024 - Present | Remote</div>
+      </div>
+      <ul>
+        <li>Review and evaluate AI-generated financial analyses for accuracy and clarity across M&A, LBO modeling, DCF valuation, and financial reporting.</li>
+        <li>Identify complex methodological errors in valuation logic and accounting treatment.</li>
+        <li>Write detailed model solutions and explanations that guide AI reasoning, defining the scoring rubrics used to grade output correctness.</li>
+        <li>Fact-check financial claims and assumptions against stringent GAAP, IFRS, and SEC filing standards.</li>
+      </ul>
     </div>
 
-    <footer>
-        <p>System initialized successfully. &copy; 2026 Bennet M. Carter[cite: 1].</p>
-        <p style="margin-top: 0.5rem;">Source tracking on <a href="https://github.com/bennetmkcarter54-star">GitHub</a></p>
-    </footer>
+    <div class="log-entry">
+      <div class="log-header">
+        <div class="log-title">
+          <h3>FP&A Manager, Corporate Finance</h3>
+          <div class="log-company">@ Shopify</div>
+        </div>
+        <div class="log-meta">2022 - 2024 | Ottawa, ON</div>
+      </div>
+      <ul>
+        <li>Led annual budgeting and quarterly forecasting across multiple business units, supporting a massive revenue portfolio.</li>
+        <li>Built financial models and scenario analyses to evaluate strategic initiatives, including geographic expansion and product launches.</li>
+        <li>Automated core forecasting processes using Python and Power BI, effectively cutting manual workload by 20%.</li>
+        <li>Prepared detailed board-level presentations and executive reporting on company performance.</li>
+      </ul>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-header">
+        <div class="log-title">
+          <h3>Private Equity Associate</h3>
+          <div class="log-company">@ Torquest Partners</div>
+        </div>
+        <div class="log-meta">2020 - 2022 | Toronto, ON</div>
+      </div>
+      <ul>
+        <li>Led financial due diligence on acquisition targets, critically assessing business models, cash flows, and growth trajectories.</li>
+        <li>Built dynamic LBO models to evaluate investment returns and optimize capital structures.</li>
+        <li>Evaluated over 100 potential investment opportunities, successfully executing 3 platform investments and 2 add-on acquisitions.</li>
+      </ul>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-header">
+        <div class="log-title">
+          <h3>Investment Banking Analyst, TMT</h3>
+          <div class="log-company">@ BMO Capital Markets</div>
+        </div>
+        <div class="log-meta">2018 - 2020 | Toronto, ON</div>
+      </div>
+      <ul>
+        <li>Built and actively maintained DCF, LBO, and comparable company models for M&A and capital raising transactions.</li>
+        <li>Supported execution on over $2 billion in completed M&A transactions, including multi-faceted cross-border deals.</li>
+        <li>Conducted deep-dive industry research and financial due diligence for live deals within the tech sector.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="section-header">
+    <span class="section-id">03</span>
+    <h2 class="section-title">Architecture & Protocol</h2>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h3 style="font-family: var(--font-mono); font-size: 1rem; color: var(--accent-blue); margin-bottom: 1.5rem;">> LOAD_MODULES: Skills</h3>
+      <div class="tag-cloud">
+        <div class="tag">Financial Modeling (DCF, LBO, Comps)</div>
+        <div class="tag">AI Model Evaluation</div>
+        <div class="tag">Rubric & Prompt Design</div>
+        <div class="tag">Python & Power BI</div>
+        <div class="tag">Advanced Excel</div>
+        <div class="tag">GAAP / IFRS / SEC Standards</div>
+        <div class="tag">FP&A and Forecasting</div>
+        <div class="tag">Valuation Analysis</div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-bottom: 1.5rem;">> SYSTEM_REQUIREMENTS: Education</h3>
+      <div class="edu-list">
+        <div class="edu-item">
+          <h4>Chartered Financial Analyst (CFA)</h4>
+          <p>CFA Institute</p>
+        </div>
+        <div class="edu-item">
+          <h4>Data Science for Investment Professionals Certificate</h4>
+          <p>CFA Institute</p>
+        </div>
+        <div class="edu-item">
+          <h4>Financial Technology Graduate Certificate</h4>
+          <p>Completed 2018</p>
+        </div>
+        <div class="edu-item">
+          <h4>Bachelor's Degree in Finance</h4>
+          <p>Completed 2014 - 2018</p>
+        </div>
+        <div class="edu-item">
+          <h4>AI Coursework</h4>
+          <p>AI for Everyone (Andrew Ng); Machine Learning (Stanford)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>BENNET MICHAL CARTER // INITIALIZED 2026</p>
+  <p style="margin-top: 0.5rem;"><a href="mailto:bennetmkcarter@gmail.com" style="color: var(--accent-blue);">bennetmkcarter@gmail.com</a></p>
+</footer>
 
 </body>
 </html>
