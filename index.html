@@ -3,382 +3,436 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bennet Michal Carter | CFA & Finance AI Professional</title>
+    <title>Bennet Michal Carter | Finance x AI</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600&display=swap');
+
         :root {
-            --primary-color: #0b2447; 
-            --secondary-color: #19376d;
-            --accent-color: #d4af37; 
-            --text-main: #333333;
-            --text-light: #f8f9fa;
-            --bg-color: #ffffff;
-            --bg-alt: #f1f5f9;
+            --bg-main: #050505;
+            --bg-surface: #111111;
+            --bg-card: #181818;
+            --text-main: #94a3b8;
+            --text-bright: #f8fafc;
+            --accent: #00f0ff;
+            --accent-glow: rgba(0, 240, 255, 0.15);
+            --border-color: #333333;
+            --font-mono: 'Fira Code', monospace;
+            --font-sans: 'Inter', sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-main);
             color: var(--text-main);
-            line-height: 1.6;
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
         /* Typography */
         h1, h2, h3, h4 {
-            font-family: 'Georgia', serif;
-            color: var(--primary-color);
+            font-family: var(--font-mono);
+            color: var(--text-bright);
+            font-weight: 600;
         }
 
-        /* Header Section */
-        header {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 4rem 2rem;
-            text-align: center;
-            border-bottom: 5px solid var(--accent-color);
-        }
-
-        header h1 {
-            color: var(--text-light);
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: #cbd5e1;
-            max-width: 600px;
-            margin: 0 auto 1rem auto;
-        }
-        
-        header .contact-info {
-            font-size: 1rem;
-            color: var(--accent-color);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1100px;
+        /* Terminal Intro */
+        .hero {
+            padding: 6rem 2rem 4rem;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 2.5rem 2rem;
         }
 
-        /* Sections */
-        section {
-            margin-bottom: 3.5rem;
-        }
-
-        section h2 {
-            font-size: 2.2rem;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-        }
-
-        .philosophy-text {
-            font-size: 1.1rem;
-            color: #475569;
-            line-height: 1.8;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1.5rem;
-            background-color: var(--bg-alt);
-            padding: 1.5rem;
-            border-radius: 0 5px 5px 0;
-        }
-
-        /* Grid for Experience */
-        .experience-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .job-card {
-            background-color: var(--bg-color);
-            padding: 2rem;
+        .terminal-window {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            border-top: 4px solid var(--primary-color);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .job-header {
+        .terminal-header {
+            background-color: #1a1a1a;
+            padding: 0.75rem 1rem;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        .terminal-body {
+            padding: 2rem;
+            font-family: var(--font-mono);
+        }
+
+        .prompt {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .terminal-body h1 {
+            font-size: 2.5rem;
+            margin: 1rem 0 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .terminal-body p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: "/>";
+            color: var(--accent);
+        }
+
+        .section-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-color) 0%, transparent 100%);
+        }
+
+        /* Experience Grid */
+        .experience-grid {
+            display: grid;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: flex-start;
             margin-bottom: 1rem;
             flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .job-header h3 {
-            font-size: 1.5rem;
-            margin-right: 1rem;
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--text-bright);
+            margin-bottom: 0.25rem;
         }
 
-        .job-header .company {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-            font-weight: bold;
+        .company {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
         }
 
-        .job-header .meta {
-            color: #64748b;
-            font-style: italic;
+        .date-badge {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.5rem;
             font-size: 0.95rem;
         }
 
-        .job-card ul {
-            margin-left: 1.5rem;
-            color: #475569;
-        }
-        
-        .job-card li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Grid for Highlights */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+        .card li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-family: var(--font-mono);
         }
 
-        .highlight-card {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .highlight-card h3 {
-            color: var(--accent-color);
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Education & Certs */
-        .edu-card {
-            background-color: var(--bg-alt);
-            padding: 1.5rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-        
-        .edu-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        /* Skills Tags */
-        .skills-container {
+        /* Tech Stack / Skills */
+        .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
         }
 
         .skill-tag {
-            background-color: var(--bg-alt);
-            color: var(--primary-color);
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border: 1px solid #cbd5e1;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background-color: var(--accent-glow);
+        }
+
+        /* Dual Column Layout for smaller sections */
+        .dual-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .edu-item {
+            margin-bottom: 1.5rem;
         }
         
-        .skill-tag:hover {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border-color: var(--primary-color);
+        .edu-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
         }
 
         /* Footer */
         footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
             text-align: center;
-            padding: 2.5rem;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            margin-top: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #666;
         }
-        
+
         a {
-            color: var(--accent-color);
+            color: var(--accent);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
-        
+
         a:hover {
             text-decoration: underline;
+            text-shadow: 0 0 8px var(--accent-glow);
         }
 
         @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; }
-            .job-header { flex-direction: column; }
+            .hero { padding: 3rem 1rem 2rem; }
+            .container { padding: 0 1rem 2rem; }
+            .dual-col { grid-template-columns: 1fr; gap: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Bennet Michal Carter[cite: 1]</h1>
-        <p>CFA Charterholder | Finance AI Trainer | M&A and FP&A Specialist[cite: 1]</p>
-        <div class="contact-info">bennetmkcarter@gmail.com[cite: 1]</div>
-    </header>
+    <section class="hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="terminal-body">
+                <span class="prompt">bennet@ai-finance:~$</span> ./initialize_profile.sh
+                <h1>Bennet Michal Carter[cite: 1]</h1>
+                <p style="color: var(--text-main);">CFA Charterholder[cite: 1] | Finance AI Trainer[cite: 1] | M&A & FP&A Specialist[cite: 1]</p>
+                <br>
+                <span class="prompt">bennet@ai-finance:~$</span> cat summary.txt
+                <p style="color: var(--text-bright); line-height: 1.8; margin-top: 1rem;">
+                    Executing the intersection of deep financial modeling and artificial intelligence. I combine six years of investment banking, private equity, and corporate FP&A experience with modern AI model evaluation[cite: 1]. My focus is on writing training prompts, scoring rubrics, and evaluating AI reasoning in valuation, M&A, and financial reporting[cite: 1].
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    <span class="prompt">></span> Contact: <a href="mailto:bennetmkcarter@gmail.com">bennetmkcarter@gmail.com[cite: 1]</a>
+                </p>
+            </div>
+        </div>
+    </section>
 
     <div class="container">
         
-        <!-- Broadened Intro Section -->
-        <section id="about">
-            <h2>Intersection of High Finance & Artificial Intelligence</h2>
-            <div class="philosophy-text">
-                <p>As a CFA charterholder with six years of deep operational and transactional experience across investment banking, private equity, and corporate FP&A, I bring rigorous analytical standards to modern financial technology[cite: 1]. My career bridges the gap between complex financial modeling—including DCF, LBO, and comparable company analyses—and the frontier of artificial intelligence[cite: 1]. Currently, I focus on building, evaluating, and refining AI reasoning capabilities within valuation, M&A, and financial reporting ecosystems, ensuring that automated logic adheres to stringent GAAP, IFRS, and SEC filing standards[cite: 1].</p>
+        <section style="margin-bottom: 4rem;">
+            <h2 class="section-title">Core Architecture & Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-tag"><span style="color: var(--accent);">01.</span> Financial Modeling (DCF, LBO, Comps)[cite: 1]</div>
+                <div class="skill-tag"><span style="color: var(--accent);">02.</span> AI Model Evaluation & Rubric Design[cite: 1]</div>
+                <div class="skill-tag"><span style="color: var(--accent);">03.</span> Python & Power BI Data Automation[cite: 1]</div>
+                <div class="skill-tag"><span style="color: var(--accent);">04.</span> Prompt & Training Data Authoring[cite: 1]</div>
+                <div class="skill-tag"><span style="color: var(--accent);">05.</span> Valuation & Investment Analysis[cite: 1]</div>
+                <div class="skill-tag"><span style="color: var(--accent);">06.</span> FP&A and Forecasting[cite: 1]</div>
+                <div class="skill-tag"><span style="color: var(--accent);">07.</span> GAAP / IFRS / SEC Standards[cite: 1]</div>
             </div>
         </section>
 
-        <!-- Career Highlights / Broadened Impact -->
-        <section id="impact">
-            <h2>Strategic Impact Portfolio</h2>
-            <div class="grid-2">
-                <div class="highlight-card">
-                    <h3>AI Financial Logic</h3>
-                    <p>Designed scoring rubrics and evaluated over 500 AI-generated financial analyses in 6 months, successfully translating technical financial judgment into structured training prompts that measurably improved model accuracy[cite: 1].</p>
-                </div>
-                <div class="highlight-card">
-                    <h3>Capital Markets & M&A</h3>
-                    <p>Supported execution on over $2 billion in completed M&A transactions at BMO Capital Markets and evaluated over 100 potential investment opportunities resulting in 5 successful acquisitions at Torquest Partners[cite: 1].</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Professional Experience -->
-        <section id="experience">
-            <h2>Professional Experience</h2>
-            <div class="experience-timeline">
+        <section>
+            <h2 class="section-title">Professional Execution Log</h2>
+            <div class="experience-grid">
                 
-                <div class="job-card">
-                    <div class="job-header">
+                <!-- SuperAnnotate -->
+                <div class="card">
+                    <div class="card-header">
                         <div>
-                            <h3>Finance AI Trainer</h3>
-                            <span class="company">SuperAnnotate</span>
+                            <h3>Finance AI Trainer[cite: 1]</h3>
+                            <div class="company">@ SuperAnnotate[cite: 1]</div>
                         </div>
-                        <span class="meta">Remote | 2024 - Present[cite: 1]</span>
+                        <div class="date-badge">2024 - Present | Remote[cite: 1]</div>
                     </div>
                     <ul>
-                        <li>Review and evaluate AI-generated financial analyses for accuracy and clarity across M&A, LBO modeling, DCF valuation, and financial reporting[cite: 1].</li>
-                        <li>Identify methodological errors in valuation logic and accounting treatment[cite: 1].</li>
-                        <li>Write detailed model solutions and explanations to guide AI reasoning, defining the scoring rubrics used to grade output correctness and quality[cite: 1].</li>
-                        <li>Fact-check financial claims and assumptions rigorously against GAAP, IFRS, and SEC filing standards[cite: 1].</li>
+                        <li>Reviewed over 500 AI-generated financial analyses in the first six months, successfully identifying methodological errors in valuation logic and accounting treatment[cite: 1].</li>
+                        <li>Authored detailed model solutions and explanations to guide AI reasoning, defining the precise scoring rubrics used to grade output quality[cite: 1].</li>
+                        <li>Evaluated output against strict GAAP, IFRS, and SEC filing standards across M&A, LBO modeling, and DCF valuation[cite: 1].</li>
                     </ul>
                 </div>
 
-                <div class="job-card">
-                    <div class="job-header">
+                <!-- Shopify -->
+                <div class="card">
+                    <div class="card-header">
                         <div>
-                            <h3>FP&A Manager, Corporate Finance</h3>
-                            <span class="company">Shopify</span>
+                            <h3>FP&A Manager, Corporate Finance[cite: 1]</h3>
+                            <div class="company">@ Shopify[cite: 1]</div>
                         </div>
-                        <span class="meta">Ottawa, ON | 2022 - 2024[cite: 1]</span>
+                        <div class="date-badge">2022 - 2024 | Ottawa, ON[cite: 1]</div>
                     </div>
                     <ul>
-                        <li>Led annual budgeting and quarterly forecasting across multiple business units, supporting a massive $1B+ revenue portfolio[cite: 1].</li>
-                        <li>Built robust financial models and scenario analyses to evaluate strategic initiatives, including geographic expansion and new product launches[cite: 1].</li>
-                        <li>Implemented a new financial reporting framework that measurably improved forecast accuracy by 15%[cite: 1].</li>
-                        <li>Automated core forecasting processes utilizing Python and Power BI, significantly cutting manual work by 20%[cite: 1].</li>
-                        <li>Prepared comprehensive board-level presentations and executive reporting on company performance[cite: 1].</li>
+                        <li>Led annual budgeting and quarterly forecasting across multiple business units, supporting a $1B+ revenue portfolio[cite: 1].</li>
+                        <li>Automated forecasting processes utilizing Python and Power BI, efficiently cutting manual workload by 20%[cite: 1].</li>
+                        <li>Implemented a modernized financial reporting framework that demonstrably improved forecast accuracy by 15%[cite: 1].</li>
+                        <li>Built robust financial models to evaluate strategic initiatives, including key geographic expansions and product launches[cite: 1].</li>
                     </ul>
                 </div>
 
-                <div class="job-card">
-                    <div class="job-header">
+                <!-- Torquest Partners -->
+                <div class="card">
+                    <div class="card-header">
                         <div>
-                            <h3>Private Equity Associate</h3>
-                            <span class="company">Torquest Partners</span>
+                            <h3>Private Equity Associate[cite: 1]</h3>
+                            <div class="company">@ Torquest Partners[cite: 1]</div>
                         </div>
-                        <span class="meta">Toronto, ON | 2020 - 2022[cite: 1]</span>
+                        <div class="date-badge">2020 - 2022 | Toronto, ON[cite: 1]</div>
                     </div>
                     <ul>
-                        <li>Led financial due diligence on acquisition targets, comprehensively assessing business models, cash flows, and growth trajectories[cite: 1].</li>
-                        <li>Built detailed LBO models to accurately evaluate investment returns and optimize capital structures[cite: 1].</li>
-                        <li>Evaluated over 100 potential investment opportunities, directly executing 3 platform investments and 2 add-on acquisitions[cite: 1].</li>
-                        <li>Prepared investment committee memoranda and effectively presented critical findings to firm partners[cite: 1].</li>
+                        <li>Evaluated over 100 potential investment opportunities, successfully executing 3 platform investments and 2 add-on acquisitions[cite: 1].</li>
+                        <li>Led comprehensive financial due diligence on acquisition targets, rigorously assessing business models and cash flow trajectories[cite: 1].</li>
+                        <li>Built complex LBO models to evaluate potential investment returns and optimize overarching capital structures[cite: 1].</li>
                     </ul>
                 </div>
 
-                <div class="job-card">
-                    <div class="job-header">
+                <!-- BMO Capital Markets -->
+                <div class="card">
+                    <div class="card-header">
                         <div>
-                            <h3>Investment Banking Analyst, TMT</h3>
-                            <span class="company">BMO Capital Markets</span>
+                            <h3>Investment Banking Analyst, TMT[cite: 1]</h3>
+                            <div class="company">@ BMO Capital Markets[cite: 1]</div>
                         </div>
-                        <span class="meta">Toronto, ON | 2018 - 2020[cite: 1]</span>
+                        <div class="date-badge">2018 - 2020 | Toronto, ON[cite: 1]</div>
                     </div>
                     <ul>
-                        <li>Built and maintained complex DCF, LBO, and comparable company models for M&A and capital raising transactions[cite: 1].</li>
-                        <li>Supported the execution on over $2 billion in completed M&A transactions, including intricate cross-border deals[cite: 1].</li>
-                        <li>Prepared valuation analyses and highly-detailed pitch books for client presentations[cite: 1].</li>
-                        <li>Conducted deep industry research and financial due diligence for live deals within the Technology, Media & Telecom sector[cite: 1].</li>
+                        <li>Supported execution on over $2 billion in completed M&A transactions, navigating complex cross-border deals[cite: 1].</li>
+                        <li>Built and actively maintained DCF, LBO, and comparable company models for M&A and capital raising[cite: 1].</li>
+                        <li>Conducted deep-dive industry research and financial due diligence within the Technology, Media, & Telecom sectors[cite: 1].</li>
                     </ul>
                 </div>
 
             </div>
         </section>
 
-        <!-- Education & Certifications -->
-        <section id="education">
-            <h2>Education & Certifications</h2>
-            <div class="grid-2">
-                <div class="edu-card">
+        <div class="dual-col">
+            <section>
+                <h2 class="section-title">System Requirements (Edu)</h2>
+                <div class="edu-item">
                     <h4>Chartered Financial Analyst (CFA)[cite: 1]</h4>
-                    <p>CFA Institute[cite: 1]</p>
+                    <span class="company">CFA Institute[cite: 1]</span>
                 </div>
-                <div class="edu-card">
+                <div class="edu-item">
                     <h4>Data Science for Investment Professionals Certificate[cite: 1]</h4>
-                    <p>CFA Institute[cite: 1]</p>
+                    <span class="company">CFA Institute[cite: 1]</span>
                 </div>
-                <div class="edu-card">
+                <div class="edu-item">
                     <h4>Financial Technology Graduate Certificate[cite: 1]</h4>
-                    <p>Completed 2016 - 2018[cite: 1]</p>
+                    <span class="company">Completed 2018[cite: 1]</span>
                 </div>
-                <div class="edu-card">
+                <div class="edu-item">
                     <h4>Bachelor's Degree in Finance[cite: 1]</h4>
-                    <p>Completed 2014 - 2018[cite: 1]</p>
+                    <span class="company">Completed 2014 - 2018[cite: 1]</span>
                 </div>
-                <div class="edu-card" style="grid-column: 1 / -1;">
-                    <h4>Technical & AI Coursework[cite: 1]</h4>
-                    <p>AI for Everyone (Andrew Ng, Coursera); Machine Learning (Stanford University, Coursera)[cite: 1]</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Skills -->
-        <section id="skills">
-            <h2>Core Competencies</h2>
-            <div class="skills-container">
-                <span class="skill-tag">Financial Modeling (DCF, LBO, Comps)[cite: 1]</span>
-                <span class="skill-tag">Valuation & Investment Analysis[cite: 1]</span>
-                <span class="skill-tag">FP&A and Forecasting[cite: 1]</span>
-                <span class="skill-tag">Python & Power BI[cite: 1]</span>
-                <span class="skill-tag">Advanced Excel[cite: 1]</span>
-                <span class="skill-tag">GAAP/IFRS/SEC Reporting Standards[cite: 1]</span>
-                <span class="skill-tag">AI Model Evaluation & Rubric Design[cite: 1]</span>
-                <span class="skill-tag">Prompt & Training Data Authoring[cite: 1]</span>
-            </div>
-        </section>
+            <section>
+                <h2 class="section-title">External Modules (Certs)</h2>
+                <div class="card" style="padding: 1.5rem;">
+                    <h4>AI for Everyone[cite: 1]</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Andrew Ng (Coursera)[cite: 1]</p>
+                    
+                    <h4>Machine Learning[cite: 1]</h4>
+                    <p style="font-size: 0.9rem;">Stanford University (Coursera)[cite: 1]</p>
+                </div>
+            </section>
+        </div>
 
     </div>
 
     <footer>
-        <p>View source on <a href="https://github.com/bennetmkcarter54-star">GitHub</a></p>
-        <p>&copy; 2026 Bennet Michal Carter[cite: 1]. All rights reserved.</p>
+        <p>System initialized successfully. &copy; 2026 Bennet M. Carter[cite: 1].</p>
+        <p style="margin-top: 0.5rem;">Source tracking on <a href="https://github.com/bennetmkcarter54-star">GitHub</a></p>
     </footer>
 
 </body>
