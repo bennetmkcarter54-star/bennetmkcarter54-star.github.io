@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bennet Michal Carter | CFA & Finance AI Professional</title>
+    <style>
+        :root {
+            --primary-color: #0b2447; 
+            --secondary-color: #19376d;
+            --accent-color: #d4af37; 
+            --text-main: #333333;
+            --text-light: #f8f9fa;
+            --bg-color: #ffffff;
+            --bg-alt: #f1f5f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+        }
+
+        /* Header Section */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        header h1 {
+            color: var(--text-light);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 1rem auto;
+        }
+        
+        header .contact-info {
+            font-size: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3.5rem;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .philosophy-text {
+            font-size: 1.1rem;
+            color: #475569;
+            line-height: 1.8;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1.5rem;
+            background-color: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Grid for Experience */
+        .experience-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .job-card {
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .job-header h3 {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .job-header .company {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .job-header .meta {
+            color: #64748b;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .job-card ul {
+            margin-left: 1.5rem;
+            color: #475569;
+        }
+        
+        .job-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Grid for Highlights */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .highlight-card {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .highlight-card h3 {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Education & Certs */
+        .edu-card {
+            background-color: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .edu-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Skills Tags */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-alt);
+            color: var(--primary-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            margin-top: 2rem;
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .job-header { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Bennet Michal Carter[cite: 1]</h1>
+        <p>CFA Charterholder | Finance AI Trainer | M&A and FP&A Specialist[cite: 1]</p>
+        <div class="contact-info">bennetmkcarter@gmail.com[cite: 1]</div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Broadened Intro Section -->
+        <section id="about">
+            <h2>Intersection of High Finance & Artificial Intelligence</h2>
+            <div class="philosophy-text">
+                <p>As a CFA charterholder with six years of deep operational and transactional experience across investment banking, private equity, and corporate FP&A, I bring rigorous analytical standards to modern financial technology[cite: 1]. My career bridges the gap between complex financial modeling—including DCF, LBO, and comparable company analyses—and the frontier of artificial intelligence[cite: 1]. Currently, I focus on building, evaluating, and refining AI reasoning capabilities within valuation, M&A, and financial reporting ecosystems, ensuring that automated logic adheres to stringent GAAP, IFRS, and SEC filing standards[cite: 1].</p>
+            </div>
+        </section>
+
+        <!-- Career Highlights / Broadened Impact -->
+        <section id="impact">
+            <h2>Strategic Impact Portfolio</h2>
+            <div class="grid-2">
+                <div class="highlight-card">
+                    <h3>AI Financial Logic</h3>
+                    <p>Designed scoring rubrics and evaluated over 500 AI-generated financial analyses in 6 months, successfully translating technical financial judgment into structured training prompts that measurably improved model accuracy[cite: 1].</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>Capital Markets & M&A</h3>
+                    <p>Supported execution on over $2 billion in completed M&A transactions at BMO Capital Markets and evaluated over 100 potential investment opportunities resulting in 5 successful acquisitions at Torquest Partners[cite: 1].</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            <div class="experience-timeline">
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <h3>Finance AI Trainer</h3>
+                            <span class="company">SuperAnnotate</span>
+                        </div>
+                        <span class="meta">Remote | 2024 - Present[cite: 1]</span>
+                    </div>
+                    <ul>
+                        <li>Review and evaluate AI-generated financial analyses for accuracy and clarity across M&A, LBO modeling, DCF valuation, and financial reporting[cite: 1].</li>
+                        <li>Identify methodological errors in valuation logic and accounting treatment[cite: 1].</li>
+                        <li>Write detailed model solutions and explanations to guide AI reasoning, defining the scoring rubrics used to grade output correctness and quality[cite: 1].</li>
+                        <li>Fact-check financial claims and assumptions rigorously against GAAP, IFRS, and SEC filing standards[cite: 1].</li>
+                    </ul>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <h3>FP&A Manager, Corporate Finance</h3>
+                            <span class="company">Shopify</span>
+                        </div>
+                        <span class="meta">Ottawa, ON | 2022 - 2024[cite: 1]</span>
+                    </div>
+                    <ul>
+                        <li>Led annual budgeting and quarterly forecasting across multiple business units, supporting a massive $1B+ revenue portfolio[cite: 1].</li>
+                        <li>Built robust financial models and scenario analyses to evaluate strategic initiatives, including geographic expansion and new product launches[cite: 1].</li>
+                        <li>Implemented a new financial reporting framework that measurably improved forecast accuracy by 15%[cite: 1].</li>
+                        <li>Automated core forecasting processes utilizing Python and Power BI, significantly cutting manual work by 20%[cite: 1].</li>
+                        <li>Prepared comprehensive board-level presentations and executive reporting on company performance[cite: 1].</li>
+                    </ul>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <h3>Private Equity Associate</h3>
+                            <span class="company">Torquest Partners</span>
+                        </div>
+                        <span class="meta">Toronto, ON | 2020 - 2022[cite: 1]</span>
+                    </div>
+                    <ul>
+                        <li>Led financial due diligence on acquisition targets, comprehensively assessing business models, cash flows, and growth trajectories[cite: 1].</li>
+                        <li>Built detailed LBO models to accurately evaluate investment returns and optimize capital structures[cite: 1].</li>
+                        <li>Evaluated over 100 potential investment opportunities, directly executing 3 platform investments and 2 add-on acquisitions[cite: 1].</li>
+                        <li>Prepared investment committee memoranda and effectively presented critical findings to firm partners[cite: 1].</li>
+                    </ul>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <h3>Investment Banking Analyst, TMT</h3>
+                            <span class="company">BMO Capital Markets</span>
+                        </div>
+                        <span class="meta">Toronto, ON | 2018 - 2020[cite: 1]</span>
+                    </div>
+                    <ul>
+                        <li>Built and maintained complex DCF, LBO, and comparable company models for M&A and capital raising transactions[cite: 1].</li>
+                        <li>Supported the execution on over $2 billion in completed M&A transactions, including intricate cross-border deals[cite: 1].</li>
+                        <li>Prepared valuation analyses and highly-detailed pitch books for client presentations[cite: 1].</li>
+                        <li>Conducted deep industry research and financial due diligence for live deals within the Technology, Media & Telecom sector[cite: 1].</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Education & Certifications -->
+        <section id="education">
+            <h2>Education & Certifications</h2>
+            <div class="grid-2">
+                <div class="edu-card">
+                    <h4>Chartered Financial Analyst (CFA)[cite: 1]</h4>
+                    <p>CFA Institute[cite: 1]</p>
+                </div>
+                <div class="edu-card">
+                    <h4>Data Science for Investment Professionals Certificate[cite: 1]</h4>
+                    <p>CFA Institute[cite: 1]</p>
+                </div>
+                <div class="edu-card">
+                    <h4>Financial Technology Graduate Certificate[cite: 1]</h4>
+                    <p>Completed 2016 - 2018[cite: 1]</p>
+                </div>
+                <div class="edu-card">
+                    <h4>Bachelor's Degree in Finance[cite: 1]</h4>
+                    <p>Completed 2014 - 2018[cite: 1]</p>
+                </div>
+                <div class="edu-card" style="grid-column: 1 / -1;">
+                    <h4>Technical & AI Coursework[cite: 1]</h4>
+                    <p>AI for Everyone (Andrew Ng, Coursera); Machine Learning (Stanford University, Coursera)[cite: 1]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <h2>Core Competencies</h2>
+            <div class="skills-container">
+                <span class="skill-tag">Financial Modeling (DCF, LBO, Comps)[cite: 1]</span>
+                <span class="skill-tag">Valuation & Investment Analysis[cite: 1]</span>
+                <span class="skill-tag">FP&A and Forecasting[cite: 1]</span>
+                <span class="skill-tag">Python & Power BI[cite: 1]</span>
+                <span class="skill-tag">Advanced Excel[cite: 1]</span>
+                <span class="skill-tag">GAAP/IFRS/SEC Reporting Standards[cite: 1]</span>
+                <span class="skill-tag">AI Model Evaluation & Rubric Design[cite: 1]</span>
+                <span class="skill-tag">Prompt & Training Data Authoring[cite: 1]</span>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>View source on <a href="https://github.com/bennetmkcarter54-star">GitHub</a></p>
+        <p>&copy; 2026 Bennet Michal Carter[cite: 1]. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
